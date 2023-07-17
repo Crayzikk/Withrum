@@ -1,0 +1,79 @@
+html,body{
+    height: 100%;
+    font-family: 'Kaushan Script', cursive;
+    font-family: 'Karla', sans-serif;
+    font-family: 'Kufam', sans-serif;
+    
+}
+main{
+    padding: 1rem;
+}
+.navbar-brand{
+    color: #073100;
+    font-family: Kaushan Script;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+#logo_letter{
+    color: #6DFFB9;
+    text-align: center;
+    font-family: Kaushan Script;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.auth_container{
+    /* width: 37.875rem; */
+    margin-top: 5rem;
+    padding: 2rem 6rem;
+    border-radius: 1.5625rem;
+    background: #FFF;
+}
+.auth_head{
+    color: #073100;
+    text-align: center;
+    font-family: Karla;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 2.3rem;
+}
+input{
+    /* margin: 1rem 0 6rem; */
+    border-radius: 1.875rem;
+    border: 1.5px solid #000;
+    background: #FFF;
+}
+.form-label{
+    color: #000;
+    text-align: center;
+    font-family: Karla;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.13rem;
+}
+.form-control{
+    border-radius: 1.875rem;
+    border: 1.5px solid #000;
+    background: #FFF;
+    padding: 1rem 1.5rem;
+}
+.btn{
+    margin: 1rem;
+    border-radius: 2.1875rem;
+    background: #71C9CE;
+    padding: 0.625rem 1.625rem;
+    color: var(--text, #000831);
+    text-align: center;
+    font-family: Kufam;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
