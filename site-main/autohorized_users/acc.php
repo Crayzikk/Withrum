@@ -1,10 +1,26 @@
 <?php
+  
   session_start();
 
   if(!$_SESSION['user'])
   {
     header("Location: http://localhost/Withrum/site-main/index.html");
   }
+  else
+  {
+    include "../database/connect.php";
+
+    $id = $_SESSION['user']['id'];
+    $img = mysqli_query($connect, "SELECT `avatar` FROM `users` WHERE `id` = '$id'");
+
+    if(mysqli_num_rows($img) > 0)
+    {
+      $avatar = mysqli_fetch_assoc($img);
+
+      $_SESSION['user']['avatar'] = $avatar['avatar'];
+    }    
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -25,17 +41,17 @@
   <header>
   <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
-          <a class="navbar-brand" href="./acc.html"><span id="logo_letter">W</span>ithrum</a>
+          <a class="navbar-brand" href="../autohorized_users/acc.php"><span id="logo_letter">W</span>ithrum</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Dialogs</a>
+                <a class="nav-link active" aria-current="page" href="../autohorized_users/dialogs/dialogs.html">Dialogs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./error.html">My friends</a>
+                <a class="nav-link" href="./error.html">Friends</a>
               </li>
             </div>
             </ul>
@@ -49,9 +65,21 @@
         <div class="col d-flex justify-content-center flex-column ac_inform" style="background: #FFF;">
           <div class="d-flex p-2 justify-content-center flex-column">
             <div class="d-flex justify-content-center">
-              <img src="../img/photo_user.png" alt="User_photo" class="User_photo">
+              <?php
+                $user_avatar;
+                
+                if(isset($_SESSION['user']['avatar']))
+                {
+                  $user_avatar = $_SESSION['user']['avatar']; 
+                }
+                else
+                {
+                  $user_avatar = "img/photo_user.png";
+                }
+              ?>
+              <img src="../<?php echo $user_avatar; ?>" alt="User_photo" class="User_photo">
             </div>
-            <a href="" class="d-flex p-2 justify-content-center link">Load image</a>
+            <hr>
             <div>
               <h2 class="User_name">
                 <?= $_SESSION['user'] ['username'] ?>
@@ -60,6 +88,85 @@
                 E mail:
               </h2>
               <label for="" style="margin-left: 140px;"> <?= $_SESSION['user'] ['email'] ?> </label>
+              
+              <div class="container mt-5">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#settingsModal" style="margin-left: 170px;">
+                  Settings
+                </button>
+                <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="settingsModalLabel">
+                          Settings
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container mt-5">
+                          <form action="../php/Edit_name.php" method="post">
+                            <div class="mb-3">
+                              <p>
+                                Enter a new name:
+                              </p>
+                              <input type="text" class="form-control" placeholder="Enter name" name="edit_name" autocomplete="off">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                              Save
+                            </button>
+                          </form>
+                        </div>
+                        <hr>
+                        <div class="container mt-5">
+                          <form action="../php/Load_img.php" method="post" enctype="multipart/form-data" novalidate>
+                            <div class="mb-3">
+                              <p>
+                                Upload avatar:
+                              </p>
+                              <input type="file" class="form-control-file form-control-sm" id="LoadImg" name="avatar">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                              Save
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="container mt-5">
+                          <form action="../php/SignOut.php" method="post">
+                            <div class="mb-3">
+                              <p>
+                                Sign out of the account:
+                              </p>
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                              Signout
+                            </button>
+                          </form>
+                      </div>
+                      <hr>
+                      <div class="container mt-5">
+                          <form action="../php/Delete.php" method="post">
+                            <div class="mb-3">
+                              <p>
+                                Delete account:
+                              </p>
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                              Delete
+                            </button>
+                          </form>
+                      </div>
+                      <br>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
