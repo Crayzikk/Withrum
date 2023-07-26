@@ -30,7 +30,7 @@ else if($connect)
             "username" => $user['username'],
         ];
 
-        header("Location: http://localhost/Withrum/site-main/acc.html");
+        header("Location: http://localhost/Withrum/site-main/autohorized_users/acc.php");
      }
      else
      {

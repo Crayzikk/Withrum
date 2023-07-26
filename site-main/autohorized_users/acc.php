@@ -1,3 +1,12 @@
+<?php
+  session_start();
+
+  if(!$_SESSION['user'])
+  {
+    header("Location: http://localhost/Withrum/site-main/index.html");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +16,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Karla&family=Kaushan+Script&family=Kufam:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="./styles/acc_style.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/acc_style.css">
     <link rel="icon" href="./img/mini_logo.png">
     <title>Withrum</title>
 </head>
@@ -40,23 +49,17 @@
         <div class="col d-flex justify-content-center flex-column ac_inform" style="background: #FFF;">
           <div class="d-flex p-2 justify-content-center flex-column">
             <div class="d-flex justify-content-center">
-              <img src="./img/photo_user.png" alt="User_photo" class="User_photo">
+              <img src="../img/photo_user.png" alt="User_photo" class="User_photo">
             </div>
             <a href="" class="d-flex p-2 justify-content-center link">Load image</a>
             <div>
               <h2 class="User_name">
-                User_name
+                <?= $_SESSION['user'] ['username'] ?>
               </h2>
               <h2>
                 E mail:
               </h2>
-              <label for="">Exemple@mail.com</label>
-              <h2>
-                Password
-              </h2>
-              <label for="">
-                **********
-              </label>
+              <label for="" style="margin-left: 140px;"> <?= $_SESSION['user'] ['email'] ?> </label>
             </div>
           </div>
         </div>
@@ -67,19 +70,19 @@
             </h2>
             <ul class="p-2">
               <li class="d-flex">
-                <img src="./img/photo_user.png" alt="photo_user" class="online_usr">
+                <img src="../img/photo_user.png" alt="photo_user" class="online_usr">
                 <p class="Usrname_online">User_name</p>
               </li>
               <li class="d-flex">
-                <img src="./img/photo_user.png" alt="photo_user" class="online_usr">
+                <img src="../img/photo_user.png" alt="photo_user" class="online_usr">
                 <p class="Usrname_online">User_name</p>
               </li>
               <li class="d-flex">
-                <img src="./img/photo_user.png" alt="photo_user" class="online_usr">
+                <img src="../img/photo_user.png" alt="photo_user" class="online_usr">
                 <p class="Usrname_online">User_name</p>
               </li>
               <li class="d-flex">
-                <img src="./img/photo_user.png" alt="photo_user" class="online_usr">
+                <img src="../img/photo_user.png" alt="photo_user" class="online_usr">
                 <p class="Usrname_online">User_name</p>
               </li>
             </ul>
